@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhypen Idol Slot</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <h1>🎰 Enhypen Idol Slot 🎰</h1>
+
+  <div id="multiplier-bar">
+    <div class="multiplier-box" data-mult="1">1×</div>
+    <div class="multiplier-box" data-mult="2">2×</div>
+    <div class="multiplier-box" data-mult="3">3×</div>
+    <div class="multiplier-box" data-mult="4">4×</div>
+    <div class="multiplier-box" data-mult="5">5×</div>
+  </div>
+  
+  <div class="slot-container" id="slot"></div>
+
+  
+  <div class="stat-bar">
+    <div id="points-box">Points: 1000</div>
+    
+    <div class="bet-container">
+      <div id="bet-box" class="clickable">Bet: 10 ▼</div>
+      <div class="bet-options hidden">
+        <button class="bet-btn" data-bet="10">10</button>
+        <button class="bet-btn" data-bet="20">20</button>
+        <button class="bet-btn" data-bet="50">50</button>
+       <button class="bet-btn" data-bet="100">100</button>
+      </div>
+    </div>
+
+    <div id="win-box">Total Win: 0</div>
+  </div>
+
+
+  <div class="spin-button-container">
+    <button id="spin-btn" onclick="spin()">SPIN</button>
+
+  <script src="hays.js"></script>
+</body>
+</html>

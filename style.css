@@ -1,0 +1,307 @@
+/* ========== Global Reset & Theme ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark1: #001133;
+  --bg-dark2: #000022;
+  --neon-blue: #00ccff;
+  --neon-blue-lite: #00ccffcc;
+  --neon-blue-shadow: #00ccff44;
+  --card-bg: #000a1f;
+  --hud-bg: #001a33;
+  --text-light: #ffffff;
+  --dim-opacity: 0.3;
+  --round: 12px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--bg-dark1), var(--bg-dark2));
+  color: var(--text-light);
+  padding: 20px 10px;
+  text-align: center;
+}
+
+/* ========== Headings ========== */
+h1 {
+  font-size: 28px;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue-lite);
+  margin-bottom: 10px;
+}
+
+/* ========== Slot Grid Container ========== */
+#slot {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 6px;
+  width: 500px;
+  height: 620px; /* portrait‑friendly */
+  padding: 12px;
+  background: var(--card-bg);
+  border: 3px solid var(--neon-blue);
+  border-radius: var(--round);
+  box-shadow: 0 0 25px var(--neon-blue-shadow);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+/* ========== Slot Images ========== */
+.slot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4; /* Forces portrait shape */
+  border-radius: var(--round);
+  background-color: #0c1a2b;
+  animation: dropFromTop 0.6s ease-out forwards;
+  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slot-image.highlighted {
+  border: 3px solid var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.slot-image.dimmed {
+  opacity: var(--dim-opacity);
+  filter: grayscale(80%);
+}
+
+@keyframes dropFromTop {
+  0% {
+    transform: translateY(-150%);
+  }
+  60% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+
+/* ========== HUD & Stat Bar ========== */
+.stat-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 14px;
+  width: 500px;
+  padding: 10px;
+  background: var(--hud-bg);
+  border: 2px solid var(--neon-blue);
+  box-shadow: 0 0 12px var(--neon-blue-shadow);
+  border-radius: var(--round);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  font-weight: bold;
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue-lite);
+}
+
+/* ========== Bet Dropdown ========== */
+.bet-container {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bet-options {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card-bg);
+  border: 2px solid var(--neon-blue);
+  border-radius: var(--round);
+  box-shadow: 0 0 15px var(--neon-blue-shadow);
+  padding: 6px;
+  display: flex;
+  gap: 6px;
+  z-index: 20;
+}
+.bet-options.hidden { display: none; }
+
+.bet-btn {
+  background: #00334d;
+  color: var(--neon-blue);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--round);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.bet-btn:hover {
+  background: #005b8a;
+}
+
+/* Disabled bet box */
+#bet-box.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes scatterPulse {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0.4);
+    border-color: gold;
+  }
+  50% {
+    box-shadow: 0 0 25px 12px rgba(255, 215, 0, 0.8);
+    border-color: #ffe066;
+  }
+  100% {
+    box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0.4);
+    border-color: gold;
+  }
+}
+
+#slot.scatter-glow {
+  animation: scatterPulse 1.5s infinite ease-in-out;
+  border: 2px solid gold;
+  border-radius: 10px;
+  transition: border 0.3s ease;
+}
+
+/* ========== Spin Button Container ========== */
+#spin-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 20px;
+}
+
+#spin-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--neon-blue);
+  color: #000;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 18px var(--neon-blue-lite);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+#spin-btn:hover { background: #00aaff; transform: scale(1.05); }
+#spin-btn:disabled { background: #005b8a; cursor: not-allowed; }
+
+/* ========== Multiplier Bar ========== */
+:root {
+  --neon-blue: #39f;
+  --neon-blue-shadow: #3cf;
+  --bg-dark: #010e1b;
+  --round: 10px;
+}
+
+.multiplier-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.multiplier-box {
+  flex: 0 0 auto;
+  min-width: 38px;
+  height: 34px;
+  background: #072037;
+  color: var(--neon-blue);
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--neon-blue-shadow);
+  border-radius: var(--round);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px rgba(51, 204, 255, 0.3);
+}
+
+.multiplier-box.active {
+  background: var(--neon-blue);
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 5px var(--neon-blue-shadow);
+  transform: scale(1.05);
+}
+
+/* ========== Scatter Glow (optional) ========== */
+.scatter {
+  border: 3px solid #ffcc00;
+  box-shadow: 0 0 15px 4px #ffcc00aa;
+}
+
+/* Glow effect for scatter mode */
+.slot-container.scatter-glow {
+  box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.8); /* golden glow */
+  border: 2px solid gold;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* ========== Mobile Improvements (≤600px) ========== */
+@media (max-width: 600px) {
+  h1 { font-size: 22px; }
+
+  #slot {
+    width: 95vw;
+    height: 120vw;
+    gap: 4px;
+    padding: 6px;
+  }
+
+  .slot-image {
+    border-radius: 8px;
+    aspect-ratio: 3 / 4;
+  }
+
+  .stat-bar {
+    width: 95vw;
+    padding: 8px;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  #spin-btn {
+    width: 85px;
+    height: 85px;
+    font-size: 1rem;
+  }
+
+  .multiplier-container {
+    gap: 6px;
+    overflow-x: auto;
+  }
+
+  .multiplier-box {
+    width: 42px;
+    height: 34px;
+    font-size: 14px;
+  }
+}
